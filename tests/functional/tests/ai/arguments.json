@@ -1,0 +1,116 @@
+{
+    "tests": [
+        {
+            "name": "AI: No Arguments",
+            "description": "Run the AI without any arguments - should fail with error",
+            "input": ["./zappy_ai"],
+            "expected_output": "CONTAINS - Not enough arguments provided",
+            "expected_return": 84
+        },
+        {
+            "name": "AI: Missing Port",
+            "description": "Try to run without port parameter",
+            "input": ["./zappy_ai", "-n", "team1", "-h", "127.0.0.1"],
+            "expected_output": "CONTAINS - Missing required option: -p port",
+            "expected_return": 84
+        },
+        {
+            "name": "AI: Missing Team Name",
+            "description": "Try to run without team name parameter",
+            "input": ["./zappy_ai", "-p", "4242", "-h", "127.0.0.1"],
+            "expected_output": "CONTAINS - Missing required option: -n name",
+            "expected_return": 84
+        },
+        {
+            "name": "AI: Missing Hostname",
+            "description": "Try to run without hostname parameter",
+            "input": ["./zappy_ai", "-p", "4242", "-n", "team1"],
+            "expected_output": "CONTAINS - AI initialized with configuration:",
+            "expected_return": 84
+        },
+        {
+            "name": "AI: Invalid Port (negative)",
+            "description": "Try to run with negative port value",
+            "input": ["./zappy_ai", "-p", "-4242", "-n", "team1", "-h", "127.0.0.1"],
+            "expected_output": "CONTAINS - Port must be a positive integer",
+            "expected_return": 84
+        },
+        {
+            "name": "AI: Invalid Port (zero)",
+            "description": "Try to run with port value of zero",
+            "input": ["./zappy_ai", "-p", "0", "-n", "team1", "-h", "127.0.0.1"],
+            "expected_output": "CONTAINS - Port must be a positive integer",
+            "expected_return": 84
+        },
+        {
+            "name": "AI: Invalid Port (too large)",
+            "description": "Try to run with port value exceeding maximum",
+            "input": ["./zappy_ai", "-p", "65536", "-n", "team1", "-h", "127.0.0.1"],
+            "expected_output": "CONTAINS - Port must be less than or equal to 65535",
+            "expected_return": 84
+        },
+        {
+            "name": "AI: Invalid Port (non-numeric)",
+            "description": "Try to run with non-numeric port value",
+            "input": ["./zappy_ai", "-p", "port", "-n", "team1", "-h", "127.0.0.1"],
+            "expected_output": "CONTAINS - Port must be a valid number",
+            "expected_return": 84
+        },
+        {
+            "name": "AI: Empty Team Name",
+            "description": "Try to run with empty team name",
+            "input": ["./zappy_ai", "-p", "4242", "-n", "", "-h", "127.0.0.1"],
+            "expected_output": "CONTAINS - Team name cannot be empty",
+            "expected_return": 84
+        },
+        {
+            "name": "AI: Invalid IP Address Format (too many segments)",
+            "description": "Try to run with invalid IP address format - too many segments",
+            "input": ["./zappy_ai", "-p", "4242", "-n", "team1", "-h", "127.0.0.1.5"],
+            "expected_output": "CONTAINS - IP address must have exactly 4 segments",
+            "expected_return": 84
+        },
+        {
+            "name": "AI: Invalid IP Address Format (too few segments)",
+            "description": "Try to run with invalid IP address format - too few segments",
+            "input": ["./zappy_ai", "-p", "4242", "-n", "team1", "-h", "127.0.1"],
+            "expected_output": "CONTAINS - IP address must have exactly 4 segments",
+            "expected_return": 84
+        },
+        {
+            "name": "AI: Invalid IP Address (out of range)",
+            "description": "Try to run with IP address segment out of range",
+            "input": ["./zappy_ai", "-p", "4242", "-n", "team1", "-h", "127.0.0.256"],
+            "expected_output": "CONTAINS - IP address segments must be between 0 and 255",
+            "expected_return": 84
+        },
+        {
+            "name": "AI: Invalid IP Address (non-numeric)",
+            "description": "Try to run with non-numeric IP address segment",
+            "input": ["./zappy_ai", "-p", "4242", "-n", "team1", "-h", "127.0.0.abc"],
+            "expected_output": "CONTAINS - Invalid machine name or IP address",
+            "expected_return": 84
+        },
+        {
+            "name": "AI: Empty Hostname",
+            "description": "Try to run with empty hostname",
+            "input": ["./zappy_ai", "-p", "4242", "-n", "team1", "-h", ""],
+            "expected_output": "CONTAINS - Machine name cannot be empty",
+            "expected_return": 84
+        },
+        {
+            "name": "AI: Unknown Option",
+            "description": "Try to run with unknown command-line option",
+            "input": ["./zappy_ai", "-p", "4242", "-n", "team1", "-h", "127.0.0.1", "-x", "unknown"],
+            "expected_output": "CONTAINS - Unknown option: -x",
+            "expected_return": 84
+        },
+        {
+            "name": "AI: Missing Value for Option",
+            "description": "Try to run with missing value for an option",
+            "input": ["./zappy_ai", "-p", "4242", "-n", "team1", "-h"],
+            "expected_output": "CONTAINS - Missing value for option: -h",
+            "expected_return": 84
+        }
+    ]
+}

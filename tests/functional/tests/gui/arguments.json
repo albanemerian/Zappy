@@ -1,0 +1,129 @@
+{
+    "tests": [
+        {
+            "name": "GUI: Valid arguments",
+            "description": "Testing with valid port and hostname",
+            "input": {
+                "program": ["./zappy_gui", "-p", "8080", "-h", "127.0.0.1"],
+                "succeed_after": 1
+            },
+            "expected_output": "ANYTHING",
+            "expected_return": 0
+        },
+        {
+            "name": "GUI: Valid arguments with localhost",
+            "description": "Testing with valid port and localhost",
+            "input": {
+                "program": ["./zappy_gui", "-p", "8080", "-h", "localhost"],
+                "succeed_after": 1
+            },
+            "expected_output": "ANYTHING",
+            "expected_return": 0
+        },
+        {
+            "name": "GUI: Missing arguments",
+            "description": "No arguments provided",
+            "input": ["./zappy_gui"],
+            "expected_output": "CONTAINS - Expected 5 arguments.",
+            "expected_return": 84
+        },
+        {
+            "name": "GUI: Missing port option",
+            "description": "Port option is missing",
+            "input": ["./zappy_gui", "-h", "127.0.0.1"],
+            "expected_output": "CONTAINS - Expected 5 arguments.",
+            "expected_return": 84
+        },
+        {
+            "name": "GUI: Missing hostname option",
+            "description": "Hostname option is missing",
+            "input": ["./zappy_gui", "-p", "4242"],
+            "expected_output": "CONTAINS - Expected 5 arguments.",
+            "expected_return": 84
+        },
+        {
+            "name": "GUI: Invalid port (negative)",
+            "description": "Port must be a positive integer",
+            "input": ["./zappy_gui", "-p", "-123", "-h", "127.0.0.1"],
+            "expected_output": "CONTAINS - Port must be a positive integer",
+            "expected_return": 84
+        },
+        {
+            "name": "GUI: Invalid port (too large)",
+            "description": "Port must be less than or equal to 65535",
+            "input": ["./zappy_gui", "-p", "70000", "-h", "127.0.0.1"],
+            "expected_output": "CONTAINS - Port must be less than or equal to 65535",
+            "expected_return": 84
+        },
+        {
+            "name": "GUI: Invalid port (non-numeric)",
+            "description": "Port must be a valid number",
+            "input": ["./zappy_gui", "-p", "abc", "-h", "127.0.0.1"],
+            "expected_output": "CONTAINS - Port must be a valid number",
+            "expected_return": 84
+        },
+        {
+            "name": "GUI: Invalid hostname (empty)",
+            "description": "Hostname cannot be empty",
+            "input": ["./zappy_gui", "-p", "4242", "-h", ""],
+            "expected_output": "CONTAINS - Hostname cannot be empty",
+            "expected_return": 84
+        },
+        {
+            "name": "GUI: Invalid IP address format (too few segments)",
+            "description": "IP address must have exactly 4 segments",
+            "input": ["./zappy_gui", "-p", "4242", "-h", "127.0.1"],
+            "expected_output": "CONTAINS - IP address must have exactly 4 segments",
+            "expected_return": 84
+        },
+        {
+            "name": "GUI: Invalid IP address format (too many segments)",
+            "description": "IP address must have exactly 4 segments",
+            "input": ["./zappy_gui", "-p", "4242", "-h", "127.0.0.1.5"],
+            "expected_output": "CONTAINS - IP address must have exactly 4 segments",
+            "expected_return": 84
+        },
+        {
+            "name": "GUI: Invalid IP address segment (out of range)",
+            "description": "IP address segments must be between 0 and 255",
+            "input": ["./zappy_gui", "-p", "4242", "-h", "127.0.0.256"],
+            "expected_output": "CONTAINS - IP address must contain valid numeric segments",
+            "expected_return": 84
+        },
+        {
+            "name": "GUI: Invalid IP address segment (non-numeric)",
+            "description": "IP address must contain valid numeric segments",
+            "input": ["./zappy_gui", "-p", "4242", "-h", "127.0.0.abc"],
+            "expected_output": "CONTAINS - IP address must contain valid numeric segments",
+            "expected_return": 84
+        },
+        {
+            "name": "GUI: Unknown option",
+            "description": "Unknown option is provided",
+            "input": ["./zappy_gui", "-p", "4242", "-x", "value"],
+            "expected_output": "CONTAINS - Unknown option: -x",
+            "expected_return": 84
+        },
+        {
+            "name": "GUI: Extra arguments",
+            "description": "Extra arguments are provided",
+            "input": ["./zappy_gui", "-p", "4242", "-h", "127.0.0.1", "extra"],
+            "expected_output": "CONTAINS - Expected 5 arguments.",
+            "expected_return": 84
+        },
+        {
+            "name": "GUI: Port without value",
+            "description": "Port option is provided without a value",
+            "input": ["./zappy_gui", "-p", "-h", "127.0.0.1"],
+            "expected_output": "CONTAINS - Expected 5 arguments.",
+            "expected_return": 84
+        },
+        {
+            "name": "GUI: Hostname without value",
+            "description": "Hostname option is provided without a value",
+            "input": ["./zappy_gui", "-p", "4242", "-h"],
+            "expected_output": "CONTAINS - Expected 5 arguments.",
+            "expected_return": 84
+        }
+    ]
+}

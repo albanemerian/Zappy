@@ -1,0 +1,132 @@
+{
+    "tests": [
+        {
+            "name": "Server: Valid arguments",
+            "description": "Testing with correct values in each fields",
+            "input": {
+                "program": ["./zappy_server", "-p", "6262", "-x", "100", "-y", "100", "-n", "team1", "team2", "-c", "6", "-f", "10"],
+                "succeed_after": 1
+            },
+            "expected_output": "ANYTHING",
+            "expected_return": 0
+        },
+        {
+            "name": "Server: Valid arguments without frequency",
+            "description": "Testing with correct values and no frequency flag (should use default)",
+            "input": {
+                "program": ["./zappy_server", "-p", "4243", "-x", "100", "-y", "100", "-n", "team1", "team2", "-c", "6"],
+                "succeed_after": 1
+            },
+            "expected_output": "ANYTHING",
+            "expected_return": 0
+        },
+        {
+            "name": "Server: Invalid port (smaller)",
+            "description": "Testing with incorrect values in port fields",
+            "input": ["./zappy_server", "-p", "42", "-x", "100", "-y", "100", "-n", "team1", "team2", "-c", "6", "-f", "10"],
+            "expected_output": "CONTAINS - Port must be between 1024 and 65535 (included).",
+            "expected_return": 84
+        },
+        {
+            "name": "Server: Invalid port (bigger)",
+            "description": "Testing with incorrect values in port fields",
+            "input": ["./zappy_server", "-p", "100000", "-x", "100", "-y", "100", "-n", "team1", "team2", "-c", "6", "-f", "10"],
+            "expected_output": "CONTAINS - Port must be between 1024 and 65535 (included).",
+            "expected_return": 84
+        },
+        {
+            "name": "Server: Invalid flag port",
+            "description": "Testing with incorrect values in port fields",
+            "input": ["./zappy_server", "-z", "8080", "-x", "100", "-y", "100", "-n", "team1", "team2", "-c", "6", "-f", "10"],
+            "expected_output": "CONTAINS - Extra argument detected.",
+            "expected_return": 84
+        },
+        {
+            "name": "Server: Invalid width (negative)",
+            "description": "Testing with incorrect values in port fields",
+            "input": ["./zappy_server", "-p", "4244", "-x", "-20", "-y", "100", "-n", "team1", "team2", "-c", "6", "-f", "10"],
+            "expected_output": "",
+            "expected_return": 84
+        },
+        {
+            "name": "Server: Invalid width (zero)",
+            "description": "Testing with incorrect values in port fields",
+            "input": ["./zappy_server", "-p", "4245", "-x", "0", "-y", "100", "-n", "team1", "team2", "-c", "6", "-f", "10"],
+            "expected_output": "CONTAINS - Width must be a positive integer between 1 and 1000.",
+            "expected_return": 84
+        },
+        {
+            "name": "Server: Invalid flag width",
+            "description": "Testing with incorrect values in port fields",
+            "input": ["./zappy_server", "-p", "4246", "-z", "100", "-y", "100", "-n", "team1", "team2", "-c", "6", "-f", "10"],
+            "expected_output": "CONTAINS - Extra argument detected.",
+            "expected_return": 84
+        },
+        {
+            "name": "Server: Invalid height (negative)",
+            "description": "Testing with incorrect values in port fields",
+            "input": ["./zappy_server", "-p", "4247", "-x", "100", "-y", "-20", "-n", "team1", "team2", "-c", "6", "-f", "10"],
+            "expected_output": "",
+            "expected_return": 84
+        },
+        {
+            "name": "Server: Invalid height (zero)",
+            "description": "Testing with incorrect values in port fields",
+            "input": ["./zappy_server", "-p", "4248", "-x", "100", "-y", "0", "-n", "team1", "team2", "-c", "6", "-f", "10"],
+            "expected_output": "CONTAINS - Height must be a positive integer between 1 and 1000.",
+            "expected_return": 84
+        },
+        {
+            "name": "Server: Invalid flag height",
+            "description": "Testing with incorrect values in port fields",
+            "input": ["./zappy_server", "-p", "4249", "-x", "100", "-z", "100", "-n", "team1", "team2", "-c", "6", "-f", "10"],
+            "expected_output": "CONTAINS - Extra argument detected.",
+            "expected_return": 84
+        },
+        {
+            "name": "Server: Invalid client_nb (negative)",
+            "description": "Testing with incorrect values in port fields",
+            "input": ["./zappy_server", "-p", "4250", "-x", "100", "-y", "100", "-n", "team1", "team2", "-c", "-20", "-f", "10"],
+            "expected_output": "",
+            "expected_return": 84
+        },
+        {
+            "name": "Server: Invalid client_nb (zero)",
+            "description": "Testing with incorrect values in port fields",
+            "input": ["./zappy_server", "-p", "4251", "-x", "100", "-y", "100", "-n", "team1", "team2", "-c", "0", "-f", "10"],
+            "expected_output": "CONTAINS - Number of clients must be betwwen 1 and 25.",
+            "expected_return": 84
+        },
+        {
+            "name": "Server: Invalid flag client_nb",
+            "description": "Testing with incorrect values in port fields",
+            "input": ["./zappy_server", "-p", "4252", "-x", "100", "-y", "100", "-n", "team1", "team2", "-z", "6", "-f", "10"],
+            "expected_output": "CONTAINS - Extra argument detected.",
+            "expected_return": 84
+        },
+        {
+            "name": "Server: Invalid frequency (zero)",
+            "description": "Testing with incorrect values in port fields",
+            "input": ["./zappy_server", "-p", "4253", "-x", "100", "-y", "100", "-n", "team1", "team2", "-c", "6", "-f", "0"],
+            "expected_output": "CONTAINS - Frequency must be 1 and 1000 (included).",
+            "expected_return": 84
+        },
+        {
+            "name": "Server: Invalid team name (empty)",
+            "description": "Testing with incorrect values in port fields",
+            "input": ["./zappy_server", "-p", "4254", "-x", "100", "-y", "100", "-n", "", "team2", "-c", "6", "-f", "10"],
+            "expected_output": "CONTAINS - Name cannot be empty.",
+            "expected_return": 84
+        },
+        {
+            "name": "Server: 4 teams",
+            "description": "Testing with correct values in each fields",
+            "input": {
+                "program": ["./zappy_server", "-p", "4255", "-x", "100", "-y", "100", "-n", "team1", "team2", "team3", "team4", "-c", "6", "-f", "10"],
+                "succeed_after": 1
+            },
+            "expected_output": "ANYTHING",
+            "expected_return": 0
+        }
+    ]
+}

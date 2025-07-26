@@ -1,0 +1,153 @@
+Fixing Common Coding Style Errors in cpplint
+
+Line too long (whitespace/line_length)
+
+    Error: "Line exceeds 80 characters."
+    Fix: Break the line into multiple lines using proper indentation or refactor long expressions.
+
+    Incorrect:
+    std::string message = "This is an overly long string that exceeds the character limit, which should be wrapped.";
+
+    Correct:
+    std::string message = "This is an overly long string that "
+    "exceeds the character limit, which "
+    "should be wrapped.";
+
+    Trailing Whitespace (whitespace/end_of_line)
+
+    Error: "Line ends with whitespace."
+    Fix: Remove any extra spaces at the end of lines.
+
+    Incorrect:
+    int a = 5;
+
+    Correct:
+    int a = 5;
+
+Missing Space Around Operators (whitespace/operators)
+
+    Error: "Missing spaces around =, +, -, etc."
+    Fix: Add spaces around operators.
+
+    Incorrect:
+    int sum=a+b;
+
+    Correct:
+    int sum = a + b;
+
+    Incorrect Indentation (whitespace/indent)
+
+    Error: "Code is not properly indented."
+    Fix: Use consistent indentation (usually 4 spaces or tabs, depending on the project style guide).
+
+    Incorrect:
+    void function() {
+        int x = 5;
+        x++;
+    }
+
+    Correct:
+    void function() {
+    int x = 5;
+    x++;
+    }
+
+Braces Formatting (readability/braces)
+
+    Error: "Braces should be on the same line for function declarations."
+    Fix: Place opening braces on the same line for function declarations and control statements.
+
+    Incorrect:
+    void myFunction()
+    {
+    // Code
+    }
+
+    Correct:
+    void myFunction() {
+    // Code
+    }
+
+    Error: "If an else has a brace on one side, it should have it on both."
+    Fix: Ensure both if and else blocks have braces when one of them does.
+
+    Incorrect:
+    if (condition) {
+    statement;
+    } else
+    statement;
+
+    Correct:
+    if (condition) {
+    statement;
+    } else {
+    statement;
+    }
+
+Tab Instead of Spaces (whitespace/tab)
+
+    Error: "Tab found; spaces are preferred."
+    Fix: Replace tabs with spaces.
+
+    Incorrect:
+    int a = 10;
+
+    Correct:
+    int a = 10;
+
+    Extra Blank Lines (whitespace/blank_line)
+
+    Error: "Too many blank lines."
+    Fix: Reduce unnecessary blank lines.
+
+    Incorrect:
+    int a = 5;
+
+    int b = 10;
+
+    Correct:
+    int a = 5;
+
+    int b = 10;
+
+Use of C-Style Cast (readability/casting)
+
+    Error: "Use static_cast, dynamic_cast, or reinterpret_cast instead of C-style casts."
+    Fix: Replace C-style casts with C++-style casts.
+
+    Incorrect:
+    int num = (int)3.14;
+
+    Correct:
+    int num = static_cast(3.14);
+
+Include Order Violation (build/include_order)
+
+    Error: "Headers should be included in the order: C system, C++ system, other libraries, project headers."
+    Fix: Order includes correctly.
+
+    Incorrect:
+    #include "myheader.hpp"
+    #include
+    #include
+
+    Correct:
+    #include
+    #include
+    #include "myheader.hpp"
+
+Empty If Statement Body (whitespace/empty_if_body)
+
+    Error: "If statement had no body and no else clause."
+    Fix: Ensure that an if statement is either meaningful or removed.
+
+    Incorrect:
+    if (condition);
+    {
+    statement;
+    }
+
+    Correct:
+    if (condition) {
+    statement;
+    }

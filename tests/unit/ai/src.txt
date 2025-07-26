@@ -1,0 +1,5 @@
+tests/unit/ai/Hash/test_hash.py
+tests/unit/ai/CLI/test_cli.py
+tests/unit/ai/Player/test_player.py
+tests/unit/ai/Communication/test_com.py
+tests/unit/ai/Communication/test_socket.py

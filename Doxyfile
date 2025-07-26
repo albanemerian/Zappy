@@ -1,0 +1,11 @@
+PROJECT_NAME           = "Zappy architecture"
+OUTPUT_DIRECTORY       = doc
+INPUT                  = ./
+RECURSIVE              = YES
+GENERATE_HTML          = NO
+GENERATE_LATEX         = YES
+MARKDOWN_SUPPORT       = YES
+EXTRACT_PRIVATE        = YES
+SHOW_FILES             = YES
+SHOW_NAMESPACES        = YES
+PROJECT_LOGO           = assets/zappy.png
