@@ -4,6 +4,9 @@
 
 ![Zappy Logo](assets/zappy.png)
 
+
+![Zappy Logo](assets/game.png)
+
 **A multiplayer network strategy game where teams compete for supremacy!**
 
 [![License](https://img.shields.io/badge/License-EPITECH-blue?style=for-the-badge)](LICENSE)
